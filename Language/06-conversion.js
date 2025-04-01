@@ -7,6 +7,8 @@ console.log(Boolean(123)); // true
 console.log('1' + 1); // 11
 console.log('2' * 3); // 6
 console.log(!!'ABC'); // true (la version courte de Boolean('ABC'))
+console.log(+'123'); // 123 (la version courte de Number(123));
+console.log(123+''); // '123' (la version courte de String(123));
 
 // Le problème de la conversion vers Boolean
 // est qu'elle n'est pas réciproque

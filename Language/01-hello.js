@@ -34,9 +34,16 @@ const names = ['Toto', 'Titi', 'Tata'];
 // 'Romain' est affecté à name (c'est comme si j'avais écris name = 'Romain')
 // L'expression hello('Romain') vaut 'Hello Romain'
 // L'expression hello(n) dépend de la valeur de n
+
+/**
+ * La fonction hello
+ * @param {string} name Le param
+ * @returns {string} Le retour
+ */
 function hello(name) {
-  return 'Hello ' + name;
+  return 'Hello ' + name.toUpperCase();
 }
+
 
 // Ici on boucle sur tous les éléments du tableau names
 // à chaque passage de la boucle n vaut l'élément

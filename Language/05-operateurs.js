@@ -19,6 +19,8 @@ console.log('ABC' > 'XYZ'); // false
 // == et ===
 console.log('123' == 123); // true
 console.log('123' === 123); // false
+console.log('123' != 123); // false
+console.log('123' !== 123); // true
 
 // Opérateurs logiques
 
