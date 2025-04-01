@@ -42,3 +42,14 @@
 // console.log(calculatriceSimple(10, 5, '/')); devrait afficher 2.
 // console.log(calculatriceSimple(10, 0, '/')); devrait afficher "Erreur: Division par zéro".
 // console.log(calculatriceSimple(10, 5, '%')); pourrait afficher null ou undefined.
+
+// Exercice 6 : Vérificateur de Palindrome
+// Objectif : Manipuler des chaînes de caractères de manière plus complexe. Un palindrome est un mot qui se lit de la même manière à l'endroit et à l'envers (ex: "radar", "level").
+// Énoncé : Créez une fonction nommée estPalindrome qui prend une chaîne de caractères chaine en paramètre.
+// La fonction doit retourner true si la chaîne est un palindrome, false sinon.
+// Simplification : Pour cet exercice, considérez que la casse et les espaces ne comptent pas (ou ignorez-les pour l'instant, concentrez-vous sur l'inversion). Une version simple peut ignorer la casse et les espaces. Une version plus simple encore ne traitera que des mots sans espaces et en minuscule. Commencez par la plus simple.
+// Indice : Vous pourriez avoir besoin de transformer la chaîne en tableau, inverser le tableau, puis rejoindre les éléments en une chaîne.
+// Exemple d'appel (version simple, sans gestion casse/espaces) :
+// console.log(estPalindrome("radar")); devrait afficher true.
+// console.log(estPalindrome("bonjour")); devrait afficher false.
+// console.log(estPalindrome("ressasser")); devrait afficher true.
