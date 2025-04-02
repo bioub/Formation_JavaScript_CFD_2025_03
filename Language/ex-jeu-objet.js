@@ -1,22 +1,21 @@
-function getRandom() {
-  return Math.random();
-}
-
-function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
-function getRandomInt(min, max) {
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
-}
-
-function getRandomIntInclusive(min, max) {
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
-}
+const Random = {
+  getRandom() {
+    return Math.random();
+  },
+  getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+  },
+  getRandomInt(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+  },
+  getRandomIntInclusive(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
+  },
+};
 
 // Exercice 1
 // Créer un namespace object Random avec la syntaxe
@@ -41,44 +40,52 @@ const readline = require('readline');
 // game.jouer();
 // Dans jouer il faudra aller chez les propriétés : entierAlea, essais et rl
 // (ex : this.rl)
+class Jeu {
+  constructor(options = {}) {
+    const min = options.min ?? 0;
+    const max = options.max ?? 100;
 
-const entierAlea = getRandomInt(0, 100);
-const essais = [];
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-function jouer() {
-  if (essais.length) {
-    console.log('Vous avez déjà joué : ' + essais.join(', '));
+    this.entierAlea = Random.getRandomInt(min, max);
+    this.essais = [];
+    this.rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
   }
-
-  rl.question('Quel est le nombre entier ? ', (answer) => {
-    // answer est de type string
-    console.log('Vous avez saisi : ', answer);
-    const entierSaisi = Number.parseInt(answer, 10);
-
-    if (Number.isNaN(entierSaisi)) {
-      console.log('Vous devez saisir en entier');
-      return jouer();
+  jouer() {
+    if (this.essais.length) {
+      console.log('Vous avez déjà joué : ' + this.essais.join(', '));
     }
 
-    essais.push(entierSaisi);
+    this.rl.question('Quel est le nombre entier ? ', (answer) => {
+      // answer est de type string
+      console.log('Vous avez saisi : ', answer);
+      const entierSaisi = Number.parseInt(answer, 10);
 
-    if (entierSaisi < entierAlea) {
-      console.log('Trop petit');
-      jouer();
-    } else if (entierSaisi > entierAlea) {
-      console.log('Trop grand');
-      jouer();
-    } else {
-      console.log('Gagné');
-      rl.close();
-    }
-  });
+      if (Number.isNaN(entierSaisi)) {
+        console.log('Vous devez saisir en entier');
+        return this.jouer();
+      }
+
+      this.essais.push(entierSaisi);
+
+      if (entierSaisi < this.entierAlea) {
+        console.log('Trop petit');
+        this.jouer();
+      } else if (entierSaisi > this.entierAlea) {
+        console.log('Trop grand');
+        this.jouer();
+      } else {
+        console.log('Gagné');
+        this.rl.close();
+      }
+    });
+  }
 }
-jouer();
+
+const game = new Jeu();
+game.jouer();
+
 
 // pile d'appel de fonction
 // ^
