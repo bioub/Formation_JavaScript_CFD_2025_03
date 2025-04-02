@@ -28,7 +28,7 @@ function calculerMoyenne(first, second, ...nbs) {
     result += nb;
   }
 
-  result /= arguments.length;
+  result /= nbs.length + 2;
 
   return result;
 }

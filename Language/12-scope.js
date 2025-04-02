@@ -1,6 +1,7 @@
 const fileVar = 'fileVar';
 
 function interne() {
+  const fileVar = 'other'
   const localVar = 'localVar';
 
   // une variable déclarée dans une fonction n'est disponible que dans cette fonction

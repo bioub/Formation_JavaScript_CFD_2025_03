@@ -38,7 +38,7 @@ console.log('E')
 // File d'attente (999ms) : taskC
 // File d'attente (1000ms) :
 
-// Côté C++
+// Côté C++ - Event Loop
 // do {
 //   executeCurrentCallStack()
 // }

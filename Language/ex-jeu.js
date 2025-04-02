@@ -1,22 +1,22 @@
-// 1 / Générer un entier aléatoire entre 0 et 100
-// et le stocker dans une variable entierAlea
+function getRandom() {
+  return Math.random();
+}
 
-// 2 / Avec Node.js, demander à l'utilisateur
-// de saisir un nombre entier (avec Romain), puis
-// convertir la saisie clavier en nombre
-// puis afficher si le nombre est plus grand
-// ou plus petit (ou trouvé) que l'entier aleatoire
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
-// 3 / (avec Romain) pouvoir rejouer
+function getRandomInt(min, max) {
+  const minCeiled = Math.ceil(min);
+  const maxFloored = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+}
 
-// 4 / stocker chaque essais dans un tableau
-// et afficher entre 2 tours, le contenu du tableau
-// ex: Vous avez déjà joué : 20, 5, 8
-
-// 5 / Afficher une message d'erreur si
-// l'utilisateur ne saisi pas un nombre
-// ne pas utiliser throw (à cause du code async)
-// ex: ABC
+function getRandomIntInclusive(min, max) {
+  const minCeiled = Math.ceil(min);
+  const maxFloored = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
+}
 
 // Dans Node.js les APIs ne sont pas globaux
 // contrairement au navigateur
@@ -25,22 +25,50 @@ const readline = require('readline');
 // Configure readline pour lire sur le clavier
 // et afficher des messages dans le terminal
 
+const entierAlea = getRandomInt(0, 100);
+const essais = [];
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 function jouer() {
+  if (essais.length) {
+    console.log('Vous avez déjà joué : ' + essais.join(', '));
+  }
+
   rl.question('Quel est le nombre entier ? ', (answer) => {
     // answer est de type string
     console.log('Vous avez saisi : ', answer);
+    const entierSaisi = Number.parseInt(answer, 10);
 
-    // rejouer
-    jouer()
+    if (Number.isNaN(entierSaisi)) {
+      console.log('Vous devez saisir en entier');
+      return jouer();
+    }
 
-    // pour quitter (arrete d'écouter line)
-    // rl.close();
-  })
+    essais.push(entierSaisi);
 
+    if (entierSaisi < entierAlea) {
+      console.log('Trop petit');
+      jouer();
+    } else if (entierSaisi > entierAlea) {
+      console.log('Trop grand');
+      jouer();
+    } else {
+      console.log('Gagné');
+      rl.close();
+    }
+  });
 }
 jouer();
+
+// pile d'appel de fonction
+// ^
+// |
+// |
+// |                                      [question]                           [question]
+// |[question]                       [log][jouer   ]                      [log][jouer   ]
+// |[jouer   ]⟳                     [taskAnswer]   ⟳                    [taskAnswer]   ⟳
+// +---------------------------------50ENTREE-----------------------------25ENTREE-------> temps
+//
